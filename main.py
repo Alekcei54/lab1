@@ -1,15 +1,23 @@
 import math
+
+
 def task24_int():
     """
-    Знайти кількість повних хвилин, що минули з початку останньої години
+    З початку доби минуло N секунд (N - ціле). Знайти кількість повних
+    хвилин, що минули з початку останньої години.
     """
     # Введіть кількість секунд
-    N = int(input("Введіть кількість секунд: "))
+    # Перевіряємо коректність вводу даних
+    try:
+      N = int(input("Введіть кількість секунд: "))
+    except ValueError:
+      print("Число повинно бути цілим!")
+    else:
+      # Знайдемо кількість хвилин, що минуло з початку останньої години
+      minutes = (N // 60) % 60
+      print("Кількість повних хвилин з початку останньої години:", minutes)
 
-    # Знайдемо кількість хвилин, що минуло з початку останньої години
-    minutes = (N // 60) % 60
 
-    print("Кількість повних хвилин з початку останньої години:", minutes)
 def task26():
     """
     Функція для розрахунку прикладу.
@@ -17,16 +25,16 @@ def task26():
     try:
         x = float(input("Введіть x: "))
         num = 4*math.tan(x*x)*math.sin(x)+1/5*math.sqrt(math.fabs((math.sin(x)*math.sin(x))*math.tan(x)))
-        denum=math.cbrt(4+((x**3)/5))+math.log(math.fabs(x),2)
-        if denum == 0:
-            print("Ділення на нуль неможливе.")
-        else:
-            y = num / denum
-            print(f"Значення y при x={x}: {y}")
+        denum=math.pow(4+((x**3)/5), 1/3)+math.log(math.fabs(x),2)
+        # Нема необхідності окремо перевіряти ділення на 0, оскільки ви 
+        # відстежуєте помилку ZeroDivisionError
     except ValueError:
         print("Помилка: Введіть коректне числове значення для x.")
     except ZeroDivisionError:
         print("Помилка: Ділення на нуль неможливе.")
+    else:
+        y = num / denum
+        print(f"Значення y при x={x}: {y}")
 
 
 def task1_bool():
@@ -36,12 +44,12 @@ def task1_bool():
     """
     try:
         a = int(input("Введіть число A: "))
-
+    except ValueError:
+        print("Помилка:Введіть ціле число для a, b та c.")
+    else:
         is_positive = a>0
 
         print(is_positive)
-    except ValueError:
-        print("Помилка:Введіть ціле число для a, b та c.")
 
 
 if __name__ == "__main__":
